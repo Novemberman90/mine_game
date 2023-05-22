@@ -44,6 +44,7 @@ head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
       let column = index % width;
       let row = Math.floor(index / width); 
       event.target.innerHTML = trueMine(row, column) ? '💣' : ' '; //U+1F4A9
+      event.target.disabled = true;
      });
 
      function trueMine(row, column) {
