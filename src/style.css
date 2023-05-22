@@ -9,13 +9,12 @@
     width: 500px;
     height: 500px;
     display: flex;
-    justify-content: center;
-flex-wrap: wrap
+    margin: 0 auto;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
 }
 .header{
-   border: 1px solid black;
-    width: 200px;
-    height: 50px;
     display: flex;
 }
 
@@ -28,13 +27,12 @@ flex-wrap: wrap
 .mineBoard {
     width: 320px;
     height: 320px;
-    border: 1px solid blueviolet;
     display: grid;
-    grid-template-columns: repeat(10, 20px);
+    grid-template-columns: repeat(10, 32px);
 }
 
 .button {
-    height: 20px;
+    height: 32px;
     font-size: 20px;
 }
 
