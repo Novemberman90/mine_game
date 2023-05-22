@@ -3,13 +3,13 @@
 //game container
 let gameContainer = document.createElement('div');
 gameContainer.className = ('containerGame');
-document.body.appendChild(gameContainer);
+document.body.prepend(gameContainer);
 
 
 //header
  let head = document.createElement('div');
  head.className =('header');
-gameContainer.appendChild(head);
+gameContainer.prepend(head);
 document.querySelector('.header');
 
 head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
@@ -19,13 +19,15 @@ head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
 // Board
     let board = document.createElement('div');
     board.className = ('mineBoard');
-    gameContainer.appendChild(board);
+    gameContainer.append(board);
 
 
     startGame (10,10,12);
 
     function startGame (width, heigth, mine_count) {
-    
+      let mineField = board;
+      let countSells  = width*heigth;
+     mineField.innerHTML = '<button class= "button" > </button> '.repeat(countSells);
     }
 
 
