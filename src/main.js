@@ -28,6 +28,8 @@ head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
       let mineField = board;
       let countSells  = width*heigth;
      mineField.innerHTML = '<button class= "button" > </button> '.repeat(countSells);
+     let cell = [ mineField.children];
+  
 
      let mines = [Array(countSells).keys()]
      .sort(() => Math.random() -0.5)
@@ -37,6 +39,11 @@ head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
       if(Event.target.tagName !== 'BUTTON') {
         return
       }
+
+      let index = cell.indexOf(Event.target);
+      let colums = index % width;
+      let row = Math.floor(index - colums); 
+      Event.target.innerHTML = trueMine() ? 'U+1F4A9' : ' '; //U+1F4A9
      });
 
      function trueMine(row, colums) {
