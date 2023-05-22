@@ -22,32 +22,32 @@ head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
     gameContainer.append(board);
 
 
-    startGame (10,10,12);
+    startGame (10, 10, 15);
 
     function startGame (width, heigth, mine_count) {
       let mineField = board;
-      let countSells  = width*heigth;
-     mineField.innerHTML = '<button class= "button" > </button> '.repeat(countSells);
-     let cell = [ mineField.children];
+      let countSells  = width * heigth;
+      mineField.innerHTML = '<button class="button" ></button>'.repeat(countSells);
+      let cell = [...mineField.children];
   
 
-     let mines = [Array(countSells).keys()]
-     .sort(() => Math.random() -0.5)
+     let mines = [...Array(countSells).keys()]
+     .sort(() => Math.random() - 0.5)
      .slice (0, mine_count);
 
-     mineField.addEventListener('click', (Event)=> {
-      if(Event.target.tagName !== 'BUTTON') {
-        return
+     mineField.addEventListener('click', (event)=> {
+      if (event.target.tagName !== 'BUTTON') {
+        return;
       }
 
-      let index = cell.indexOf(Event.target);
-      let colums = index % width;
-      let row = Math.floor(index - colums); 
-      Event.target.innerHTML = trueMine() ? 'U+1F4A9' : ' '; //U+1F4A9
+      let index = cell.indexOf(event.target);
+      let column = index % width;
+      let row = Math.floor(index / width); 
+      event.target.innerHTML = trueMine(row, column) ? '💣' : ' '; //U+1F4A9
      });
 
-     function trueMine(row, colums) {
-      let index = row * width + colums;
+     function trueMine(row, column) {
+      let index = row * width + column;
       return mines.includes(index);
      }
 
