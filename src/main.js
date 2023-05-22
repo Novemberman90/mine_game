@@ -28,8 +28,23 @@ head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
       let mineField = board;
       let countSells  = width*heigth;
      mineField.innerHTML = '<button class= "button" > </button> '.repeat(countSells);
-    }
 
+     let mines = [Array(countSells).keys()]
+     .sort(() => Math.random() -0.5)
+     .slice (0, mine_count);
+
+     mineField.addEventListener('click', (Event)=> {
+      if(Event.target.tagName !== 'BUTTON') {
+        return
+      }
+     });
+
+     function trueMine(row, colums) {
+      let index = row * width + colums;
+      return mines.includes(index);
+     }
+
+    }
 
 
 /*// mineplace
