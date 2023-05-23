@@ -30,22 +30,32 @@ head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
       mineField.innerHTML = '<button class="button" ></button>'.repeat(countSells);
       let cell = [...mineField.children];
   
-
+      // create bomb
      let mines = [...Array(countSells).keys()]
      .sort(() => Math.random() - 0.5)
      .slice (0, mine_count);
+
+     //We check that the click is on the button, and not somewhere else
 
      mineField.addEventListener('click', (event)=> {
       if (event.target.tagName !== 'BUTTON') {
         return;
       }
 
+      //calculate which cell is clicked
       let index = cell.indexOf(event.target);
       let column = index % width;
       let row = Math.floor(index / width); 
-      event.target.innerHTML = trueMine(row, column) ? '💣' : ' '; //U+1F4A9
-      event.target.disabled = true;
+      openCell(row, column);
      });
+
+
+     function openCell(row, column){
+      let index = row * width + column;
+      let cells = cell(index);
+      cells.target.innerHTML = trueMine(row, column) ? '💣' : ' '; //U+1F4A9
+      cells.target.disabled = true;
+     }
 
      function trueMine(row, column) {
       let index = row * width + column;
