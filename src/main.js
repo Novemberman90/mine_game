@@ -64,9 +64,9 @@ head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
 
      function openCell(row, column){
       let index = row * width + column;
-      let cells = cell(index);
-      cells.target.innerHTML = trueMine(row, column) ? '💣' : countMines(row, column); //U+1F4A9
-      cells.target.disabled = true;
+      let cells = cell[index];
+      cells.innerHTML = trueMine(row, column) ? '💣' : countMines(row, column); //U+1F4A9
+      cells.disabled = true;
      }
 
 
