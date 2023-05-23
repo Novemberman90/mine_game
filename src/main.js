@@ -49,13 +49,26 @@ head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
       openCell(row, column);
      });
 
+     function countMines (row, column) {
+      let counter = 0;
+      for (let x = -1; x <= 1; x++) {
+        for (let y = -1; y <= 1; y++) {
+          if (trueMine(row + y, column + x)) {
+            counter++
+          }
+        }
+      }
+      return counter;
+     }
+
 
      function openCell(row, column){
       let index = row * width + column;
       let cells = cell(index);
-      cells.target.innerHTML = trueMine(row, column) ? '💣' : ' '; //U+1F4A9
+      cells.target.innerHTML = trueMine(row, column) ? '💣' : countMines(row, column); //U+1F4A9
       cells.target.disabled = true;
      }
+
 
      function trueMine(row, column) {
       let index = row * width + column;
