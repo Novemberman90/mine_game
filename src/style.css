@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.containerGame {
+    border: 1px solid red;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+.header{
+    display: flex;
+}
+
+.titleHead {
+    color: red;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.mineBoard {
+    width: 320px;
+    height: 320px;
+    display: grid;
+    grid-template-columns: repeat(10, 32px);
+}
+
+.button {
+    height: 32px;
+    font-size: 20px;
+    color: black;
+    transition: all 0.3ms ease-in-out;
+    margin: 1px;
+}
+
+.button:hover {
+    background-color: bisque;
+}
+
+
