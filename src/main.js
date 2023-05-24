@@ -22,15 +22,18 @@ head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
     gameContainer.append(board);
 
 
-    startGame (10, 10, 15);
-
+    startGame (10, 10, 12);
+      
     function startGame (width, heigth, mine_count) {
       let mineField = board;
       let countSells  = width * heigth;
       mineField.innerHTML = '<button class="button" ></button>'.repeat(countSells);
       let cell = [...mineField.children];
   
-      // create bomb
+      let cloeCount = countSells;
+
+
+      // create and sort bomb
      let mines = [...Array(countSells).keys()]
      .sort(() => Math.random() - 0.5)
      .slice (0, mine_count);
@@ -49,28 +52,74 @@ head.innerHTML= `<span class="titleHead">Minesweeper</span>`;
       openCell(row, column);
      });
 
+     function validCell(row, column) {
+      return row >= 0 && 
+      row < heigth &&
+       column >= 0 && 
+       column < width;
+     }
+
      function countMines (row, column) {
       let counter = 0;
       for (let x = -1; x <= 1; x++) {
         for (let y = -1; y <= 1; y++) {
           if (trueMine(row + y, column + x)) {
-            counter++
-          }
+            counter++;
+          };
         }
       }
       return counter;
      }
 
-
      function openCell(row, column){
+      //if (!trueMine(row, column))return;
+      
       let index = row * width + column;
       let cells = cell[index];
-      cells.innerHTML = trueMine(row, column) ? '💣' : countMines(row, column); //U+1F4A9
-      cells.disabled = true;
-     }
+      if (cells.disabled === true){
+        return;
+      }
+      cells.disabled = true; 
+      
+
+      if(trueMine(row, column)) {
+       // cells.innerHTML = trueMine(row, column) ? '💣' : countMines(row, column); //U+1F4A9
+        //cells.disabled = true;
+    // }
+        cells.innerHTML = '💣';
+        alert('game over');
+        return;
+      }
+
+      cloeCount--;
+      if (cloeCount <= mine_count) {
+        alert('Winner!');
+        return;
+      }
+      
+      let count = countMines(row, column);
+      if (count !== 0){
+        cells.innerHTML = count;
+        return;
+      }
+
+      for (let x = -1; x <= 1; x++) {
+        for (let y = -1; y <= 1; y++) {
+          openCell(row + y, column + x);
+        }
+      }
+    }
+ 
+      /*for (let x = -1; x <= 1; x++) {
+        for (let y = -1; y <= 1; y++) {
+          openCell(row + y, column + x);
+        }
+      }
+     }*/
 
 
      function trueMine(row, column) {
+      if (!validCell(row, column)) return false;
       let index = row * width + column;
       return mines.includes(index);
      }
