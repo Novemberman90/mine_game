@@ -35,13 +35,12 @@
     height: 32px;
     font-size: 20px;
     color: black;
-    /*border: 1px solid black;*/
-    padding: 2px;
-    margin: 0.5px;
     transition: all 0.3ms ease-in-out;
+    margin: 1px;
 }
 
 .button:hover {
     background-color: bisque;
 }
+
 
